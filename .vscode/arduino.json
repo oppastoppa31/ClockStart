@@ -1,0 +1,9 @@
+{
+    "sketch": "ClockStart.ino",
+    "configuration": "cpu=atmega2560",
+    "board": "arduino:avr:mega",
+    "intelliSenseGen": "enable",
+    "buildPreferences": [
+        ["build.extra_flags", "-Wall"]
+    ]
+}
