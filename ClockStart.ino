@@ -61,6 +61,10 @@ void setup() {
   Serial.begin(9600);
   Serial.println("Begin");
 
+  /// @note Uncomment this to set the time (seconds, minutes, hours, day of
+  /// week,day of month, month, year)
+  // rtc.set(30, 16, 10,URTCLIB_WEEKDAY_MONDAY,25, 9, 23);
+
   IrSender.begin(IR_SEND_PIN);
   // Send 1 key (3 times to ensure it is received)
   IrSender.sendNEC(0x1, KEY_1, 3);
@@ -90,6 +94,12 @@ void loop() {
       IrSender.sendNEC(0x1, KEY_START, 3);
       delay(1000);
 
+    } else if (rtc.hour() == 10 && rtc.minute() == 50 && rtc.second() == 0) {
+      // 10:50 AM
+      Serial.println("10:50");
+      // Turn on timer
+      IrSender.sendNEC(0x1, KEY_CLOCK, 3);
+      delay(1000);
     } else if (rtc.hour() == 11 && rtc.minute() == 20 && rtc.second() == 0) {
       // 11:20 AM
       Serial.println("11:20");
