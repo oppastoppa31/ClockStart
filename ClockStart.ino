@@ -58,9 +58,6 @@ String now() {
 }
 
 void setup() {
-  Serial.begin(9600);
-  Serial.println("Begin");
-
   /// @note Uncomment this to set the time (seconds, minutes, hours, day of
   /// week,day of month, month, year)
   // rtc.set(30, 16, 10,URTCLIB_WEEKDAY_MONDAY,25, 9, 23);
@@ -81,39 +78,30 @@ void setup() {
 void loop() {
   rtc.refresh();
   // Print current time for debugging purposes
-  Serial.println(now());
-  // Check if it is a weekday
-  if (rtc.dayOfWeek() != URTCLIB_WEEKDAY_SATURDAY &&
-      rtc.dayOfWeek() != URTCLIB_WEEKDAY_SUNDAY) {
-    if (rtc.hour() == 7 && rtc.minute() == 50 && rtc.second() == 0) {
-      // 7:50 AM
-      Serial.println("7:50");
-      // Turn on timer
-      IrSender.sendNEC(0x1, KEY_1, 3);
-      delay(1000);
-      IrSender.sendNEC(0x1, KEY_START, 3);
-      delay(1000);
-
-    } else if (rtc.hour() == 10 && rtc.minute() == 50 && rtc.second() == 0) {
-      // 10:50 AM
-      Serial.println("10:50");
-      // Turn on timer
-      IrSender.sendNEC(0x1, KEY_CLOCK, 3);
-      delay(1000);
-    } else if (rtc.hour() == 11 && rtc.minute() == 20 && rtc.second() == 0) {
-      // 11:20 AM
-      Serial.println("11:20");
-      // Turn on timer
-      IrSender.sendNEC(0x1, KEY_1, 3);
-      delay(1000);
-      IrSender.sendNEC(0x1, KEY_START, 3);
-      delay(1000);
-    } else if (rtc.hour() == 14 && rtc.minute() == 20 && rtc.second() == 0) {
-      // 2:20 PM
-      Serial.println("2:20");
-      // Set to default clock mode
-      IrSender.sendNEC(0x1, KEY_CLOCK, 3);
-    }
+  // Serial.println(now());
+  if (rtc.hour() == 7 && rtc.minute() == 50 && rtc.second() == 0) {
+    // 7:50 AM
+    // Turn on timer
+    IrSender.sendNEC(0x1, KEY_1, 3);
+    delay(1000);
+    IrSender.sendNEC(0x1, KEY_START, 3);
+    delay(1000);
+  } else if (rtc.hour() == 10 && rtc.minute() == 49 && rtc.second() == 0) {
+    // 10:50 AM
+    // Turn on timer
+    IrSender.sendNEC(0x1, KEY_CLOCK, 3);
+    delay(1000);
+  } else if (rtc.hour() == 11 && rtc.minute() == 20 && rtc.second() == 0) {
+    // 11:20 AM
+    // Turn on timer
+    IrSender.sendNEC(0x1, KEY_1, 3);
+    delay(1000);
+    IrSender.sendNEC(0x1, KEY_START, 3);
+    delay(1000);
+  } else if (rtc.hour() == 14 && rtc.minute() == 20 && rtc.second() == 0) {
+    // 2:20 PM
+    // Set to default clock mode
+    IrSender.sendNEC(0x1, KEY_CLOCK, 3);
   }
-  delay(1000);
+  delay(500);
 }
